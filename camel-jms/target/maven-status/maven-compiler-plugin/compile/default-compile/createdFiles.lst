@@ -1,0 +1,4 @@
+org/wildfly/camel/examples/jms/OrderGenerator.class
+org/wildfly/camel/examples/jms/JmsRouteBuilder.class
+org/wildfly/camel/examples/jms/JmsServlet.class
+org/wildfly/camel/examples/jms/producer/JmsComponentProducer.class

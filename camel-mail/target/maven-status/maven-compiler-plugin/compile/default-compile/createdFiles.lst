@@ -1,0 +1,3 @@
+org/wildfly/camel/examples/mail/MailSendServlet.class
+org/wildfly/camel/examples/mail/MailRouteBuilder.class
+org/wildfly/camel/examples/mail/MailSessionProducer.class

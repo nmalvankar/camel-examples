@@ -1,0 +1,5 @@
+org/wildfly/camel/examples/rest/RestRouteBuilder.class
+org/wildfly/camel/examples/rest/service/CustomerService.class
+org/wildfly/camel/examples/rest/util/Resources.class
+org/wildfly/camel/examples/rest/data/CustomerRepository.class
+org/wildfly/camel/examples/rest/model/Customer.class

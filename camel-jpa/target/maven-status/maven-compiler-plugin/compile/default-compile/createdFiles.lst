@@ -1,0 +1,9 @@
+org/wildfly/camel/examples/jpa/producer/TransactionManagerProducer.class
+org/wildfly/camel/examples/jpa/JPARouteBuilder.class
+org/wildfly/camel/examples/jpa/processor/JpaResultProcessor.class
+org/wildfly/camel/examples/jpa/producer/QueryParametersProducer.class
+org/wildfly/camel/examples/jpa/service/OrderService.class
+org/wildfly/camel/examples/jpa/RestAPIRouteBuilder.class
+org/wildfly/camel/examples/jpa/producer/JPAComponentProducer.class
+org/wildfly/camel/examples/jpa/util/Resources.class
+org/wildfly/camel/examples/jpa/model/Order.class

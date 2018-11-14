@@ -1,0 +1,3 @@
+org/wildfly/camel/examples/cxf/jaxrs/CamelCxfRsServlet.class
+org/wildfly/camel/examples/cxf/jaxrs/GreetingService.class
+org/wildfly/camel/examples/cxf/jaxrs/GreetingsProcessor.class
