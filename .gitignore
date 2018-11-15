@@ -3,6 +3,14 @@
 ### Ansible ###
 *.retry
 
+# IntelliJ
+.idea
+*.iml
+target
+
+bin
+tmp
+
 ### Eclipse ###
 
 .metadata
@@ -16,6 +24,9 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+.metadata
+.classpath
+.project
 
 # External tool builders
 .externalToolBuilders/
