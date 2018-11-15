@@ -1,9 +1,0 @@
-/home/nmalvank/dev/rh/JBossFuse-7.1/jboss-eap-7.1/quickstarts/camel/camel-jpa/src/main/java/org/wildfly/camel/examples/jpa/service/OrderService.java
-/home/nmalvank/dev/rh/JBossFuse-7.1/jboss-eap-7.1/quickstarts/camel/camel-jpa/src/main/java/org/wildfly/camel/examples/jpa/model/Order.java
-/home/nmalvank/dev/rh/JBossFuse-7.1/jboss-eap-7.1/quickstarts/camel/camel-jpa/src/main/java/org/wildfly/camel/examples/jpa/JPARouteBuilder.java
-/home/nmalvank/dev/rh/JBossFuse-7.1/jboss-eap-7.1/quickstarts/camel/camel-jpa/src/main/java/org/wildfly/camel/examples/jpa/producer/TransactionManagerProducer.java
-/home/nmalvank/dev/rh/JBossFuse-7.1/jboss-eap-7.1/quickstarts/camel/camel-jpa/src/main/java/org/wildfly/camel/examples/jpa/processor/JpaResultProcessor.java
-/home/nmalvank/dev/rh/JBossFuse-7.1/jboss-eap-7.1/quickstarts/camel/camel-jpa/src/main/java/org/wildfly/camel/examples/jpa/producer/QueryParametersProducer.java
-/home/nmalvank/dev/rh/JBossFuse-7.1/jboss-eap-7.1/quickstarts/camel/camel-jpa/src/main/java/org/wildfly/camel/examples/jpa/util/Resources.java
-/home/nmalvank/dev/rh/JBossFuse-7.1/jboss-eap-7.1/quickstarts/camel/camel-jpa/src/main/java/org/wildfly/camel/examples/jpa/RestAPIRouteBuilder.java
-/home/nmalvank/dev/rh/JBossFuse-7.1/jboss-eap-7.1/quickstarts/camel/camel-jpa/src/main/java/org/wildfly/camel/examples/jpa/producer/JPAComponentProducer.java

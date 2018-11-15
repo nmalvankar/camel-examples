@@ -1,4 +1,0 @@
-org/wildfly/camel/examples/jpa/processor/OrderProcessedProcessor.class
-org/wildfly/camel/examples/jpa/processor/JpaResultProcessor.class
-org/wildfly/camel/examples/jpa/model/Order.class
-org/wildfly/camel/examples/jpa/service/OrderService.class

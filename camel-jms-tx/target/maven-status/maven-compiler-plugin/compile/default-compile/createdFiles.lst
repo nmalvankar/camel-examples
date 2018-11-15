@@ -1,9 +1,0 @@
-org/wildfly/camel/examples/jms/transacted/JmsRouteBuilder.class
-org/wildfly/camel/examples/jms/transacted/util/Resources.class
-org/wildfly/camel/examples/jms/transacted/OrderGenerator.class
-org/wildfly/camel/examples/jms/transacted/data/OrderRepository.class
-org/wildfly/camel/examples/jms/transacted/producer/JmsComponentProducer.class
-org/wildfly/camel/examples/jms/transacted/OrdersServlet.class
-org/wildfly/camel/examples/jms/transacted/model/Order.class
-org/wildfly/camel/examples/jms/transacted/producer/JpaComponentProducer.class
-org/wildfly/camel/examples/jms/transacted/producer/TransactionManagerProducer.class

@@ -1,4 +1,0 @@
-org/wildfly/camel/examples/activemq/OrderGenerator.class
-org/wildfly/camel/examples/activemq/OrdersServlet.class
-org/wildfly/camel/examples/activemq/producer/ActiveMQComponentProducer.class
-org/wildfly/camel/examples/activemq/ActiveMQRouteBuilder.class
