@@ -28,6 +28,16 @@ local.properties
 .classpath
 .project
 
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.logs
+*.iml
+.idea/
+.eclipse
+
 # External tool builders
 .externalToolBuilders/
 
