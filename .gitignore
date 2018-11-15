@@ -28,7 +28,7 @@ local.properties
 .classpath
 .project
 
-target/
+target/**
 *.class
 *.jar
 *.war
