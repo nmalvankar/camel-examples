@@ -54,7 +54,7 @@ The real webservice is located at
 
 	http://localhost:8080/real-web-service
 	
-<http://localhost:9081/real-web-service>
+<http://localhost:8080/real-web-service>
 
 To make a SOAP call open soapUI or another SOAP query tool and create a new
 project w/WSDL of <http://localhost:8080/camel-example-cxf-proxy/webservices/incident?wsdl>.
