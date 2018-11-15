@@ -1,36 +1,28 @@
-WildFly Camel Spring XML Web Application
+Camel CXF Proxy on EAP Example
 =============
 
-This is a template Apache Camel Spring application for the WildFly Camel subsystem. 
-
-This project is setup to allow you to create a Apache Camel Spring application, which can be deployed to an application
-server running the WildFly Camel subsystem. An example Spring XML Camel Route has been created for you, together with an Arquillian
-integration test.
+This is a sample project to create a CXF proxy using Camel on EAP 
 
 Prerequisites
 =============
 
-* Minimum of Java 1.7
+* Minimum of Java 1.8
 * Maven 3.2 or greater
-* JBoss EAP 6.4
+* Fuse 7.1 running on JBoss EAP 7.1
 
 
 Getting started at the Command Line
 ------------------------------------
 
-1. Install Red Hat Fuse on your application server
-
-2. Configure a $JBOSS_HOME environment variable to point at your application server installation directory
-
-3. Start the application server from the command line
+Start the application server from the command line
 
 For Linux:
 
-    $JBOSS_HOME/bin/standalone.sh -c standalone.xml
+    $JBOSS_HOME/bin/standalone.sh -c standalone-full.xml
 
 For Windows:
 
-    %JBOSS_HOME%\bin\standalone.bat -c standalone.xml
+    %JBOSS_HOME%\bin\standalone.bat -c standalone-full.xml
 
 
 Building the application
@@ -41,20 +33,6 @@ To build the application do:
     mvn clean install
 
 
-Run Arquillian Tests
---------------------
-    
-By default, tests are configured to be skipped as Arquillian requires the use of a container.
-
-If you already have a running application server, you can run integration tests with:
-
-    mvn clean test -Parq-remote
-
-Otherwise you can get Arquillian to start and stop the server for you (Note: you must have $JBOSS_HOME configured beforehand):
-
-    mvn clean test -Parq-managed
-
-
 Deploying the application
 -------------------------
 
@@ -62,19 +40,42 @@ To deploy the application to a running application server do:
 
     mvn clean package wildfly:deploy
 
-The server console should display lines like the following:
-
-    (MSC service thread 1-16) Apache Camel (CamelContext: spring-context) is starting
-    (MSC service thread 1-16) Camel context starting: spring-context
-    (MSC service thread 1-6) Bound camel naming object: java:jboss/camel/context/spring-context
-    (MSC service thread 1-16) Route: route4 started and consuming from: Endpoint[direct://start]
-    (MSC service thread 1-16) Total 1 routes, of which 1 is started
-
 
 Access the application
 ----------------------
 
-The application will be available at http://localhost:8080/your-context-root?name=Kermit
+The proxied webservice is located at
+
+	http://localhost:8080/camel-example-cxf-proxy/webservices/incident
+
+<http://localhost:8080/camel-example-cxf-proxy/webservices/incident>
+
+The real webservice is located at
+
+	http://localhost:8080/real-web-service
+	
+<http://localhost:9081/real-web-service>
+
+To make a SOAP call open soapUI or another SOAP query tool and create a new
+project w/WSDL of <http://localhost:8080/camel-example-cxf-proxy/webservices/incident?wsdl>.
+Then make SOAP requests of this format:
+
+	<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+	                  xmlns:rep="http://reportincident.example.camel.apache.org">
+	   <soapenv:Header/>
+	   <soapenv:Body>
+	      <rep:inputReportIncident>
+	         <incidentId></incidentId>
+	         <incidentDate>2011-11-18</incidentDate>
+	         <givenName>Bob</givenName>
+	         <familyName>Smith</familyName>
+	         <summary>Bla bla</summary>
+	         <details>More bla</details>
+	         <email>your@email.org</email>
+	         <phone>12345678</phone>
+	      </rep:inputReportIncident>
+	   </soapenv:Body>
+	</soapenv:Envelope>
 
 
 Undeploying the application
