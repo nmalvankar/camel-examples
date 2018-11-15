@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- #%L Wildfly Camel %% Copyright (C) 2013 - 2015 RedHat %% Licensed under 
+	the Apache License, Version 2.0 (the "License"); you may not use this file 
+	except in compliance with the License. You may obtain a copy of the License 
+	at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable 
+	law or agreed to in writing, software distributed under the License is distributed 
+	on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
+	express or implied. See the License for the specific language governing permissions 
+	and limitations under the License. #L% -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:camel="http://camel.apache.org/schema/spring"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:cxf="http://camel.apache.org/schema/cxf"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd        http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+    <bean class="com.redhat.demo.MyBean" id="helloBean"/>
+    <cxf:cxfEndpoint address="http://localhost:8080/real-web-service"
+        endpointName="s:RealWebServiceEndpoint" id="realWebService"
+        serviceName="s:RealWebServiceEndpointService"
+        wsdlURL="etc/real_webservice.wsdl" xmlns:s="http://reportincident.example.camel.apache.org"/>
+    <cxf:cxfEndpoint
+        address="http://localhost:8080/camel-example-cxf-proxy/webservices/incident"
+        endpointName="s:ReportIncidentEndpoint" id="reportIncident"
+        serviceName="s:ReportIncidentEndpointService"
+        wsdlURL="etc/report_incident.wsdl" xmlns:s="http://reportincident.example.camel.apache.org"/>
+    <bean class="com.redhat.demo.ResponseProcessor" id="responseProcessor"/>
+    <camelContext id="proxy-services-context" xmlns="http://camel.apache.org/schema/spring">
+        <propertyPlaceholder id="properties" location="classpath:incident.properties,file:target/custom.properties"/>
+        <endpoint id="callRealWebService" uri="http://localhost:8080/real-web-service?throwExceptionOnFailure=false"/>
+        <route id="_route1">
+            <from id="_from1" uri="direct:start"/>
+            <bean id="_bean1" ref="helloBean"/>
+        </route>
+        <route id="_route2">
+            <!-- CXF consumer using MESSAGE format log input received enrich the input 
+				by ensure the incidentId parameter is set Need to remove the http headers 
+				which could confuse the http endpoint send proxied request to real web service 
+				log answer from real web service -->
+            <from id="_from11" uri="cxf:bean:reportIncident?dataFormat=MESSAGE"/>
+            <to id="_to1" uri="log:input"/>
+            <removeHeaders id="_removeHeaders1" pattern="CamelHttp*"/>
+            <to id="_to3" ref="callRealWebService"/>
+            <to id="_to4" uri="log:output"/>
+        </route>
+        <route id="_route3">
+            <from id="_from1111" uri="cxf:bean:realWebService?dataFormat=MESSAGE"/>
+            <to id="_to13" uri="log:input"/>
+            <process id="processor" ref="responseProcessor"/>
+            <!--  <to id="_to43" uri="log:output"/> -->
+        </route>
+    </camelContext>
+</beans>
