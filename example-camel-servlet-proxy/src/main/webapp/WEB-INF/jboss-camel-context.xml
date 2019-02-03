@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:cxf="http://camel.apache.org/schema/cxf"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd        http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <!-- <util:properties id="properties" location="classpath:env.properties"/> -->
+    <bean class="java.util.HashMap" id="tokenMap"/>
+    <bean class="org.example.camel.servlet.proxy.EnrichProcessor" id="enrichProcessor"/>
+    <camelContext id="servlet-proxy-context" xmlns="http://camel.apache.org/schema/spring">
+        <!-- <propertyPlaceholder id="propertyPlaceholder" location="classpath:env.properties"/> -->
+        <restConfiguration bindingMode="auto" component="undertow"
+            contextPath="rest/api" enableCORS="true"/>
+        <rest id="rest-d62064f6-95a3-464e-9a06-c604513b7d0d" path="/health">
+            <get id="get-ea9f7910-2cff-4b51-a73e-db5cf9cda395" uri="/{id}">
+                <route id="_GetBatchDetailsRoute">
+                    <from uri="direct:batchDetails"/>
+                    <setBody>
+                    	<constant>{"result": "success"}</constant>
+                    </setBody>
+                    <log message="Sending response: ${body}"/>
+                </route>
+            </get>
+        </rest>
+        <route id="_ServletProxyRoute">
+            <from id="_fromServletProxy" uri="servlet:proxy?matchOnUriPrefix=true"/>
+            <process id="_enrichRequest" ref="enrichProcessor"/>
+            <to id="_toRealWebService" uri="http4://localhost:8080?bridgeEndpoint=true&amp;throwExceptionOnFailure=false"/>
+        </route>
+    </camelContext>
+</beans>
